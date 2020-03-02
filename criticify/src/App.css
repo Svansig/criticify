@@ -1,0 +1,21 @@
+.App {
+  position: fixed;
+  text-align: center;
+  background-color: #1DB954;
+  height: 100%; 
+  width: 100%;
+}
+
+.rows{
+  position: absolute;
+  width: 100%;
+  grid-row: 1;
+  background-color: #434633;
+  z-index: 0;
+}
+
+.songlist{
+  position: fixed;
+  right: 0;
+  z-index: 50;
+}
