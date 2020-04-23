@@ -2,8 +2,11 @@
 import React, { Component } from "react";
 import SongCard from "./songCard";
 import axios from "axios";
+import { getStorage } from "../../utils/localStore";
+import "./songList.css";
 
-async function getRecentlyPlayed(token) {
+async function getRecentlyPlayed() {
+  const token = getStorage("access_token");
   let axiosObject = {
     method: "get",
     url: "https://api.spotify.com/v1/me/player/recently-played",
@@ -49,7 +52,7 @@ class SongList extends Component {
 
   render() {
     return (
-      <div>
+      <div className="songList">
         {this.state.songList.map((song) => (
           <SongCard key={song.id} song={song} />
         ))}

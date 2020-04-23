@@ -1,20 +1,22 @@
 import React from "react";
 import axios from "axios";
-import querystring from "querystring";
 import { getStorage } from "../../utils/localStore";
 import hydrateState from "../../utils/hydrateState";
 
-const playHere = (deviceID, context_uri) => {
+const playHere = () => {
   const token = getStorage("access_token");
+  const deviceID = [getStorage("device_id")];
+  console.log(deviceID);
   axios({
     method: "PUT",
-    url:
-      "https://api.spotify.com/v1/me/player/play?" +
-      querystring.stringify({ device_id: getStorage("device_id") }),
+    url: "https://api.spotify.com/v1/me/player",
     headers: {
-      Authorization: "Bearer " + getStorage("access_token"),
+      Authorization: "Bearer " + token,
     },
-    data: context_uri,
+    data: {
+      device_ids: deviceID,
+      play: true,
+    },
   }).then(console.log);
 };
 
