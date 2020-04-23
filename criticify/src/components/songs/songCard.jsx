@@ -3,13 +3,13 @@ import { useSpring, animated } from "react-spring";
 import "./songCard.css";
 
 function SongCard(props) {
-  // console.log(props.song)
   const [selectedSong, setSelectedSong] = useState(false);
   const selected = useSpring({
-    transform: selectedSong ? `translate3d(-12px, 12px, -13px) scale(1.03)` : `translate3d(0px, 0px, 0px) scale(1)`,
-    // transform: selectedSong ? `scale(1.5)` : `scale(1)`,
-    zIndex: selectedSong? 500 : 100,
-    transformOrigin: `right top`
+    transform: selectedSong
+      ? `translate3d(-12px, 12px, -13px) scale(1.03)`
+      : `translate3d(0px, 0px, 0px) scale(1)`,
+    zIndex: selectedSong ? 500 : 100,
+    transformOrigin: `right top`,
   });
   return (
     <animated.div
@@ -18,14 +18,19 @@ function SongCard(props) {
       className="card"
     >
       <div>
-        <img src={props.song.imageURL}></img>
+        <img src={props.song.imageURL} alt=""></img>
       </div>
 
       <div className="songCol">
         <p className="track">{props.song.name}</p>
         <p className="artist">{props.song.artist}</p>
         {selectedSong ? <div>Rate: ######</div> : null}
-        {selectedSong ? <div>What you think boiiiii?!!!<input type="text" /></div>  : null}
+        {selectedSong ? (
+          <div>
+            What you think boiiiii?!!!
+            <input type="text" />
+          </div>
+        ) : null}
       </div>
     </animated.div>
   );
