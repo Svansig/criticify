@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { getStorage } from "../../utils/localStore";
 import hydrateState from "../../utils/hydrateState";
+import { Row, Button, Col, ButtonGroup } from "reactstrap";
 
 const playHere = () => {
   const token = getStorage("access_token");
@@ -22,18 +23,30 @@ const playHere = () => {
 
 const Controls = (props) => {
   return (
-    <div>
-      <button className="play-btn" onClick={props.clickPlay}></button>
-      <button
-        className="play-btn"
-        onClick={() => playHere(props.ID, props.context_uri)}
-      >
-        Play Here
-      </button>
-      <button className="next-btn" onClick={props.clickNext}></button>
-      <button className="hydrate" onClick={hydrateState}>
-        Hydrate
-      </button>
+    <div style={{ width: "60px", height: "60px" }}>
+      <Row>
+        <ButtonGroup>
+          <Button outline className="play-btn" onClick={props.clickPlay}>
+            Play
+          </Button>
+          <Button
+            className="play-btn"
+            onClick={() => playHere(props.ID, props.context_uri)}
+          >
+            Here
+          </Button>
+        </ButtonGroup>
+      </Row>
+      <Row>
+        <ButtonGroup>
+          <Button className="next-btn" onClick={props.clickNext}>
+            Next
+          </Button>
+          <Button className="hydrate" onClick={hydrateState}>
+            Hydrate
+          </Button>
+        </ButtonGroup>
+      </Row>
     </div>
   );
 };

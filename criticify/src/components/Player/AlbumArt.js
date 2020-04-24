@@ -1,11 +1,17 @@
 import React from "react";
+import PropTypes from "prop-types";
+import "./AlbumArt.css";
 
-const AlbumArt = (props) => {
+const AlbumArt = ({ sourceURL }) => {
   return (
-    <div className="album-frame">
-      <img className="album" alt="" src={props.sourceURL}></img>;
-    </div>
+    <span className="album-frame">
+      <img className="album" alt="" src={sourceURL}></img>
+    </span>
   );
+};
+
+AlbumArt.propTypes = {
+  sourceURL: PropTypes.string.isRequired,
 };
 
 export default AlbumArt;

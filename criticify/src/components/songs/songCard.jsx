@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import { useSpring, animated } from "react-spring";
-import "./songCard.css";
+import {
+  Card,
+  CardImg,
+  CardBody,
+  CardText,
+  CardTitle,
+  CardSubtitle,
+  Button,
+  Col,
+} from "reactstrap";
+// import "./songCard.css";
 
 function SongCard(props) {
   const [selectedSong, setSelectedSong] = useState(false);
@@ -12,27 +22,17 @@ function SongCard(props) {
     transformOrigin: `right top`,
   });
   return (
-    <animated.div
-      style={selected}
-      onClick={() => setSelectedSong(!selectedSong)}
-      className="card"
-    >
-      <div>
-        <img src={props.song.imageURL} alt=""></img>
-      </div>
-
-      <div className="songCol">
-        <p className="track">{props.song.name}</p>
-        <p className="artist">{props.song.artist}</p>
-        {selectedSong ? <div>Rate: ######</div> : null}
-        {selectedSong ? (
-          <div>
-            What you think boiiiii?!!!
-            <input type="text" />
-          </div>
-        ) : null}
-      </div>
-    </animated.div>
+    <Col xs="6" sm="4" xl="2">
+      <Card teal>
+        <CardImg top width="100%" src={props.song.imageURL} alt="" />
+        <CardBody>
+          <CardTitle>{props.song.name}</CardTitle>
+          <CardSubtitle>{props.song.artist}</CardSubtitle>
+          <CardText></CardText>
+          <Button>Rate It!</Button>
+        </CardBody>
+      </Card>
+    </Col>
   );
 }
 

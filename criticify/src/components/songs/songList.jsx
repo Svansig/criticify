@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import SongCard from "./songCard";
 import axios from "axios";
 import { getStorage } from "../../utils/localStore";
-import "./songList.css";
+import { Row } from "reactstrap";
 
 async function getRecentlyPlayed() {
   const token = getStorage("access_token");
@@ -19,10 +19,10 @@ async function getRecentlyPlayed() {
       id: song.track.id,
       name: song.track.name,
       artist: song.track.artists[0].name,
-      imageURL: song.track.album.images[2].url,
+      imageURL: song.track.album.images[0].url,
     };
   });
-  // .slice(0, 8);
+
   return songListMod;
 }
 
@@ -46,17 +46,17 @@ class SongList extends Component {
   componentDidMount() {
     getRecentlyPlayed(this.token).then((response) => {
       const songListFiltered = filterSongs(response);
-      this.setState({ songList: songListFiltered });
+      this.setState({ songList: songListFiltered.slice(0, 12) });
     });
   }
 
   render() {
     return (
-      <div className="songList">
+      <Row>
         {this.state.songList.map((song) => (
           <SongCard key={song.id} song={song} />
         ))}
-      </div>
+      </Row>
     );
   }
 }

@@ -1,13 +1,18 @@
 import React from "react";
+import { Row, Col } from "reactstrap";
+import "./TitleCard.css";
 
 const TitleCard = (props) => {
   return (
-    <div className="title">
-      <p>{props.songTitle}</p>
-      <p>{props.artist}</p>
-      <p>{props.album} </p>
-      <div className="title-box-underline"></div>
-    </div>
+    <span className="title">
+      <Col>
+        <Row className=".col">{props.songTitle}</Row>
+        <br />
+        <Row className=".col">{props.artist}</Row>
+        <br />
+        <Row className=".col">{props.album} </Row>
+      </Col>
+    </span>
   );
 };
 
