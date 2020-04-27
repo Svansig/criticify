@@ -3,7 +3,7 @@ var router = express.Router();
 var bodyparser = require("body-parser");
 var mongoose = require("mongoose");
 
-var reviewDB = require("../../db/Schemas/reviewSchema.ts");
+var reviewDB = require("../db/Schemas/reviewSchema.ts");
 
 router.post("/", (req, res) => {
   const {

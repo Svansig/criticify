@@ -3,7 +3,7 @@ var router = express.Router();
 var bodyparser = require("body-parser");
 var mongoose = require("mongoose");
 var request = require("request");
-var bandDB = require("../../db/Schemas/bandSchema.ts");
+var bandDB = require("../db/Schemas/bandSchema.ts");
 
 const artistBaseURL = "https://api.spotify.com/v1/artists/";
 
