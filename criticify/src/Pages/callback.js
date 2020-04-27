@@ -4,7 +4,6 @@ import queryString from "query-string";
 import { setStorage } from "../utils/localStore";
 
 const AuthCallback = () => {
-  console.log("callbacked");
   let { access_token, refresh_token, expires_in } = queryString.parse(
     window.location.hash
   );
