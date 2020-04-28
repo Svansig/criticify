@@ -28,6 +28,7 @@
     "reactstrap": "^8.4.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "restful-react": "^11.2.0",
     "thunk": "0.0.1",
     "typescript": "^3.8.3"
   },
@@ -35,7 +36,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "generate-fetcher": "restful-react import --file spotify-openAPI.yaml  --output SPOTIFY.tsx"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -1,6 +1,6 @@
-import { song } from "./songType";
+import { song, defaultSong } from "./songType";
 
-interface state {
+export interface state {
   user: {
     username: string;
     id: string;
@@ -11,9 +11,31 @@ interface state {
     position: number;
   };
   currentSong: song;
-  recentlyPlayed: song[];
+  recentlyPlayed: {
+    loading: boolean;
+    error: boolean;
+    songs: song[];
+  };
   queue: song[];
   reviewed: song[];
 }
 
-export type { state };
+export const defaultState: state = {
+  user: {
+    username: "",
+    id: "",
+    authorized: false,
+  },
+  playerStatus: {
+    playing: false,
+    position: 0,
+  },
+  currentSong: defaultSong,
+  recentlyPlayed: {
+    loading: false,
+    error: false,
+    songs: [defaultSong],
+  },
+  queue: [defaultSong],
+  reviewed: [defaultSong],
+};

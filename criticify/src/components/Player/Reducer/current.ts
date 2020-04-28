@@ -1,19 +1,9 @@
-import { song } from "../../../types/songType";
+import { song, defaultSong } from "../../../types/songType";
 import { SET_CURRENT_PLAYING } from "../Actions/songState";
 
 type actionType = {
   type: string;
   payload: song;
-};
-
-const defaultSong: song = {
-  title: "",
-  artist: "",
-  album: "",
-  albumURL: "",
-  duration: 0,
-  songID: "",
-  reviews: [],
 };
 
 export const currentSong = (state = defaultSong, action: actionType) => {
@@ -22,6 +12,7 @@ export const currentSong = (state = defaultSong, action: actionType) => {
       console.log("Current Song Reducer Called");
       return {
         ...state,
+
         ...action.payload,
       };
     default:

@@ -6,8 +6,10 @@ import TitleCard from "./TitleCard";
 import axios from "axios";
 import Controls from "./Controls";
 import { setCurrentPlaying } from "./Actions/songState";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Row, Col } from "reactstrap";
+import { moveToRecentlyPlayed } from "../../components/songs/recentlyPlayedActions";
+import { currentSong } from "./Reducer/current";
 
 const addSpotifySdkToDom = () => {
   const spotifyScript = document.createElement("script");
@@ -22,7 +24,18 @@ const addSpotifySdkToDom = () => {
 
 let player;
 
-const Player = ({ title, album, albumURL, artist, dispatch }) => {
+const handlePlay = () => {
+  if (player !== undefined) player.play();
+};
+
+const handleNext = () => {
+  if (player !== undefined) player.nextTrack();
+};
+
+const Player = () => {
+  const dispatch = useDispatch();
+  const currentlyPlayingSong = useSelector((state) => state.currentSong);
+
   useEffect(() => {
     async function getCurrentlyPlaying() {
       console.log("useEffect called.");
@@ -60,6 +73,8 @@ const Player = ({ title, album, albumURL, artist, dispatch }) => {
         },
       });
 
+      let currentSongID = "";
+
       // Error handling
       player.addListener("initialization_error", ({ message }) => {
         console.error(message);
@@ -77,7 +92,19 @@ const Player = ({ title, album, albumURL, artist, dispatch }) => {
 
       // Playback status updates
       player.addListener("player_state_changed", (state) => {
-        if (state) {
+        if (state.track_window.current_track.id !== currentSongID) {
+          dispatch(
+            moveToRecentlyPlayed({
+              title: state.track_window.current_track.name,
+              album: state.track_window.current_track.album.name,
+              artist: state.track_window.current_track.artists[0].name,
+              albumURL: state.track_window.current_track.album.images[2].url,
+              duration: state.track_window.current_track.duration_ms,
+              songID: state.track_window.current_track.id,
+            })
+          );
+          currentSongID = state.track_window.current_track.id;
+
           dispatch(
             setCurrentPlaying({
               title: state.track_window.current_track.name,
@@ -86,7 +113,6 @@ const Player = ({ title, album, albumURL, artist, dispatch }) => {
               albumURL: state.track_window.current_track.album.images[2].url,
               duration: state.track_window.current_track.duration_ms,
               songID: state.track_window.current_track.id,
-              songURI: state.track_window.current_track.uri,
             })
           );
           console.log(state);
@@ -113,24 +139,19 @@ const Player = ({ title, album, albumURL, artist, dispatch }) => {
     <div className="spotify-player">
       <Row>
         <Col>
-          <AlbumArt sourceURL={albumURL} />
+          <AlbumArt sourceURL={currentlyPlayingSong.albumURL} />
         </Col>
         <Col>
-          <TitleCard songTitle={title} artist={artist} album={album} />
+          <TitleCard
+            songTitle={currentlyPlayingSong.title}
+            artist={currentlyPlayingSong.artist}
+            album={currentlyPlayingSong.album}
+          />
         </Col>
-        <Controls />
+        <Controls clickPlay={handlePlay} clickNext={handleNext} />
       </Row>
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    title: state.currentSong.title,
-    album: state.currentSong.album,
-    albumURL: state.currentSong.albumURL,
-    artist: state.currentSong.artist,
-  };
-};
-
-export default connect(mapStateToProps)(Player);
+export default Player;

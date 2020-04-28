@@ -34,7 +34,7 @@ function SongCard(props) {
           <CardImg
             top
             width="100%"
-            src={props.song.imageURL}
+            src={props.song.albumURL}
             alt=""
             onClick={toggleDetails}
           />
@@ -42,7 +42,7 @@ function SongCard(props) {
             <CardBody>
               <Col>
                 <Collapse isOpen={showDetails}>
-                  <CardTitle>{props.song.name}</CardTitle>
+                  <CardTitle>{props.song.title}</CardTitle>
                   <CardSubtitle>{props.song.artist}</CardSubtitle>
                   <CardText></CardText>
                   <Button onClick={toggle}>Kayla Gonna Tell You!</Button>
