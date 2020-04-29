@@ -91,30 +91,32 @@ const Player = () => {
 
       // Playback status updates
       player.addListener("player_state_changed", (state) => {
-        if (state.track_window.current_track.id !== currentSongID) {
-          dispatch(
-            moveToRecentlyPlayed({
-              title: state.track_window.current_track.name,
-              album: state.track_window.current_track.album.name,
-              artist: state.track_window.current_track.artists[0].name,
-              albumURL: state.track_window.current_track.album.images[2].url,
-              duration: state.track_window.current_track.duration_ms,
-              songID: state.track_window.current_track.id,
-            })
-          );
-          currentSongID = state.track_window.current_track.id;
+        if (state) {
+          if (state.track_window.current_track.id !== currentSongID) {
+            dispatch(
+              moveToRecentlyPlayed({
+                title: state.track_window.current_track.name,
+                album: state.track_window.current_track.album.name,
+                artist: state.track_window.current_track.artists[0].name,
+                albumURL: state.track_window.current_track.album.images[2].url,
+                duration: state.track_window.current_track.duration_ms,
+                songID: state.track_window.current_track.id,
+              })
+            );
+            currentSongID = state.track_window.current_track.id;
 
-          dispatch(
-            setCurrentPlaying({
-              title: state.track_window.current_track.name,
-              album: state.track_window.current_track.album.name,
-              artist: state.track_window.current_track.artists[0].name,
-              albumURL: state.track_window.current_track.album.images[2].url,
-              duration: state.track_window.current_track.duration_ms,
-              songID: state.track_window.current_track.id,
-            })
-          );
-          console.log(state);
+            dispatch(
+              setCurrentPlaying({
+                title: state.track_window.current_track.name,
+                album: state.track_window.current_track.album.name,
+                artist: state.track_window.current_track.artists[0].name,
+                albumURL: state.track_window.current_track.album.images[2].url,
+                duration: state.track_window.current_track.duration_ms,
+                songID: state.track_window.current_track.id,
+              })
+            );
+            console.log(state);
+          }
         }
       });
 

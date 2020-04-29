@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { playSpecific } from "../Player/Actions/playerActions";
 import { useDispatch } from "react-redux";
+import { selectSongAction } from "../../components/ReviewPage/actions/selectSong";
+import { Link } from "react-router-dom";
 
 import {
   Card,
@@ -52,7 +54,16 @@ function SongCard(props) {
                   >
                     Play Now
                   </Button>
-                  <Button onClick={toggle}>Kayla Gonna Tell You!</Button>
+                  <Button>
+                    <Link
+                      to="/review"
+                      onClick={() => {
+                        dispatch(selectSongAction(props.song.songID));
+                      }}
+                    >
+                      Kayla Gonna Tell You!
+                    </Link>
+                  </Button>
                 </Collapse>
               </Col>
               <Col>

@@ -7,6 +7,7 @@ import MainPage from "./Pages/main";
 import Navigation from "./components/Navbar/navbar";
 import { Provider } from "react-redux";
 import store from "./store";
+import SongPage from "./Pages/song";
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
       <Navigation />
       <Router>
         <Switch>
+          <Route path="/review">
+            <SongPage />
+          </Route>
           <Route path="/callback/">
             <AuthCallback />
           </Route>

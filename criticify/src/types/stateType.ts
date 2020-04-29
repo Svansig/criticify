@@ -1,41 +1,23 @@
 import { song, defaultSong } from "./songType";
+import { selectedSongType } from "../Pages/song";
+import { defaultSelectedSong } from "../components/ReviewPage/reducers/selectedSong";
 
 export interface state {
-  user: {
-    username: string;
-    id: string;
-    authorized: Boolean;
-  };
-  playerStatus: {
-    playing: boolean;
-    position: number;
-  };
   currentSong: song;
   recentlyPlayed: {
     loading: boolean;
     error: boolean;
     songs: song[];
   };
-  queue: song[];
-  reviewed: song[];
+  selectedSong: selectedSongType;
 }
 
-export const defaultState: state = {
-  user: {
-    username: "",
-    id: "",
-    authorized: false,
-  },
-  playerStatus: {
-    playing: false,
-    position: 0,
-  },
+export const defaultState = {
   currentSong: defaultSong,
   recentlyPlayed: {
     loading: false,
     error: false,
     songs: [defaultSong],
   },
-  queue: [defaultSong],
-  reviewed: [defaultSong],
+  selectedSong: defaultSelectedSong,
 };
