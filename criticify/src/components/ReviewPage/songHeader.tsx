@@ -5,7 +5,7 @@ type songHeaderProps = {
   duration: number;
 };
 
-const durationToTime = (duration: number): string => {
+export const durationToTime = (duration: number): string => {
   const minutes = Math.floor(duration / 1000 / 60);
   const seconds = (duration / 1000) % 60;
   return `${minutes}:${seconds.toFixed(0).padStart(2, "0")}`;

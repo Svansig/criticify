@@ -43,6 +43,7 @@ export const selectSongAction = (songID: string) => (
           name: res.data.album.name,
           image: res.data.album.images[0].url,
           tracks: [defaultTrack],
+          albumID: res.data.album.id,
         },
       };
       dispatch({ type: REQUEST_SELECTED_SONG_SUCCESS, payload: song });

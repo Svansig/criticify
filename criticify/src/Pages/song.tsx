@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 import "./song.css";
 
-type track = {
+export type track = {
   track_num: number;
   track_title: string;
   duration: number;
@@ -23,6 +23,7 @@ type track = {
 export type albumType = {
   name: string;
   image: string;
+  albumID: string;
   tracks: Array<track>;
 };
 
@@ -36,6 +37,7 @@ export const defaultTrack: track = {
 export const defaultAlbum = {
   name: "",
   image: "",
+  albumID: "",
   tracks: [defaultTrack],
 };
 
@@ -70,22 +72,22 @@ const SongPage = () => {
 
   return (
     <Container>
-      <Button>
+      <Button size="lg" block>
         <Link to="/auth">Back To Your Recently Played</Link>
       </Button>
       <Row>
-        <Col>
+        <Col sm="4" md="3" xl="2">
           <ArtistSplash
             artistName={selectedSong.artist.name}
             image={selectedSong.artist.image[0]}
           />
         </Col>
-        <Col>
+        <Col sm="8" md="9" xl="10">
           <Row>
             <ArtistHeader
               artistName={selectedSong.artist.name}
-              artistDesc={selectedSong.artist.description}
-              image={selectedSong.artist.image[1]}
+              artistDesc=""
+              albums={selectedSong.artist.albums}
             />
           </Row>
           <Row>

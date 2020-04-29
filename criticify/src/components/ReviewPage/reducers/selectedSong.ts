@@ -14,10 +14,17 @@ import {
   REQUEST_SELECTED_ARTIST_SUCCESS,
 } from "../actions/getArtist";
 import {
+  REQUEST_ALBUM_TRACKS,
+  REQUEST_ALBUM_TRACKS_SUCCESS,
+  REQUEST_ALBUM_TRACKS_FAILURE,
+} from "../actions/getTracks";
+
+import {
   selectedSongType,
   defaultTrack,
   defaultAlbum,
   albumType,
+  track,
 } from "../../../Pages/song";
 
 export const defaultSelectedSong: selectedSongType = {
@@ -36,6 +43,7 @@ export const defaultSelectedSong: selectedSongType = {
   album: {
     name: "",
     image: "",
+    albumID: "",
     tracks: [defaultTrack],
   },
 };
@@ -44,14 +52,16 @@ type requestSelectedType = {
   type:
     | typeof REQUEST_SELECTED_SONG
     | typeof REQUEST_SELECTED_ARTIST
-    | typeof REQUEST_SELECTED_ALBUM;
+    | typeof REQUEST_SELECTED_ALBUM
+    | typeof REQUEST_ALBUM_TRACKS;
 };
 
 type requestSelectedFail = {
   type:
     | typeof REQUEST_SELECTED_SONG_FAILURE
     | typeof REQUEST_SELECTED_ARTIST_FAILURE
-    | typeof REQUEST_SELECTED_ALBUM_FAILURE;
+    | typeof REQUEST_SELECTED_ALBUM_FAILURE
+    | typeof REQUEST_ALBUM_TRACKS_FAILURE;
   payload: {
     error: {
       error: boolean;
@@ -75,12 +85,21 @@ type requestArtistSuccess = {
   payload: selectedSongType["artist"];
 };
 
+type requestTracksSuccess = {
+  type: typeof REQUEST_ALBUM_TRACKS_SUCCESS;
+  payload: {
+    albumID: string;
+    tracks: Array<track>;
+  };
+};
+
 type selectedSongTypes =
   | requestSelectedFail
   | requestSelectedType
   | requestSelectedSuccess
   | requestAlbumSuccess
-  | requestArtistSuccess;
+  | requestArtistSuccess
+  | requestTracksSuccess;
 
 export const selectedSong = (
   state = defaultSelectedSong,
@@ -90,6 +109,7 @@ export const selectedSong = (
     case REQUEST_SELECTED_SONG:
     case REQUEST_SELECTED_ALBUM:
     case REQUEST_SELECTED_ARTIST:
+    case REQUEST_ALBUM_TRACKS:
       return {
         ...state,
         loading: true,
@@ -101,6 +121,7 @@ export const selectedSong = (
     case REQUEST_SELECTED_SONG_FAILURE:
     case REQUEST_SELECTED_ALBUM_FAILURE:
     case REQUEST_SELECTED_ARTIST_FAILURE:
+    case REQUEST_ALBUM_TRACKS_FAILURE:
       return {
         ...state,
         loading: false,
@@ -133,12 +154,28 @@ export const selectedSong = (
         ...state,
         artist: {
           ...state.artist,
-          album: action.payload,
+          albums: action.payload,
         },
         loading: false,
         error: {
           error: false,
           message: "",
+        },
+      };
+    case REQUEST_ALBUM_TRACKS_SUCCESS:
+      const albums = state.artist.albums.map((album) => {
+        if (album.albumID === action.payload.albumID) {
+          return { ...album, tracks: action.payload.tracks };
+        } else {
+          return album;
+        }
+      });
+
+      return {
+        ...state,
+        artist: {
+          ...state.artist,
+          albums: albums,
         },
       };
     default:

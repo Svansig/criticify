@@ -19,7 +19,7 @@ export const getAlbum = (artistID: string) => (dispatch: Dispatch<any>) => {
         return {
           name: item.name,
           image: item.images[0].url,
-          id: item.id,
+          albumID: item.id,
           tracks: [],
         };
       });
