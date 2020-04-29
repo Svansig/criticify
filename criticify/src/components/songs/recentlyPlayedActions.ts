@@ -3,7 +3,6 @@ import Axios from "axios";
 import { Dispatch } from "react";
 import { action } from "../../types/actionType";
 import querystring from "querystring";
-import SongList from "./songList";
 
 export const NEXT_SONG = "NEXT_SONG";
 export const MOVE_FINISHED_SONG_TO_RECENTLY_PLAYED =
@@ -76,6 +75,7 @@ export const getRecentlyPlayed = (token: string) => (
           (song: any): song => {
             return {
               songID: song.track.id,
+              trackURI: song.track.uri,
               title: song.track.name,
               artist: song.track.artists[0].name,
               album: song.track.album.name,

@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { getStorage } from "../../utils/localStore";
 import hydrateState from "../../utils/hydrateState";
-import { Row, Button, Col, ButtonGroup } from "reactstrap";
+import { Row, Button, ButtonGroup } from "reactstrap";
 
 const playHere = () => {
   const token = getStorage("access_token");

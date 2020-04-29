@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { getStorage, setStorage } from "../../utils/localStore";
 import refreshAuth from "../../utils/refresh_auth";
 import AlbumArt from "./AlbumArt";
@@ -9,7 +9,6 @@ import { setCurrentPlaying } from "./Actions/songState";
 import { useSelector, useDispatch } from "react-redux";
 import { Row, Col } from "reactstrap";
 import { moveToRecentlyPlayed } from "../../components/songs/recentlyPlayedActions";
-import { currentSong } from "./Reducer/current";
 
 const addSpotifySdkToDom = () => {
   const spotifyScript = document.createElement("script");
@@ -60,7 +59,7 @@ const Player = () => {
       }
     }
     getCurrentlyPlaying();
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     addSpotifySdkToDom();
@@ -133,7 +132,7 @@ const Player = () => {
       // Connect to the player!
       player.connect();
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="spotify-player">

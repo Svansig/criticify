@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  Collapse,
-  NavbarBrand,
-  Navbar,
-  Nav,
-  NavItem,
-  NavLink,
-} from "reactstrap";
+import { Collapse, NavbarBrand, Navbar, Nav, NavItem } from "reactstrap";
 import Player from "../Player/player";
 
 const Navigation = (props) => {
@@ -17,10 +10,13 @@ const Navigation = (props) => {
   return (
     <Navbar color="blue" blue expand="md">
       <NavbarBrand href="/">Criticify</NavbarBrand>
-      <Nav>
-        <NavItem>
-          <Player />
-        </NavItem>
+      <Nav onClick={toggle}>
+        <NavItem>ENVOXE</NavItem>
+        <Collapse isOpen={isOpen}>
+          <NavItem>
+            <Player />
+          </NavItem>
+        </Collapse>
       </Nav>
     </Navbar>
   );

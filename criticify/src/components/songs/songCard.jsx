@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { playSpecific } from "../Player/Actions/playerActions";
+import { useDispatch } from "react-redux";
 
 import {
   Card,
@@ -16,7 +18,6 @@ import {
   InputGroupText,
   Input,
 } from "reactstrap";
-// import "./songCard.css";
 
 function SongCard(props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,10 +27,11 @@ function SongCard(props) {
 
   const [artistReview, setArtistReview] = useState("");
   const [songReview, setSongReview] = useState("");
+  const dispatch = useDispatch();
 
   return (
     <Col xs="6" sm="4" xl="2">
-      <Card teal>
+      <Card>
         <Row>
           <CardImg
             top
@@ -45,6 +47,11 @@ function SongCard(props) {
                   <CardTitle>{props.song.title}</CardTitle>
                   <CardSubtitle>{props.song.artist}</CardSubtitle>
                   <CardText></CardText>
+                  <Button
+                    onClick={() => dispatch(playSpecific(props.song.trackURI))}
+                  >
+                    Play Now
+                  </Button>
                   <Button onClick={toggle}>Kayla Gonna Tell You!</Button>
                 </Collapse>
               </Col>

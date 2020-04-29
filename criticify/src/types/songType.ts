@@ -2,6 +2,7 @@ import { review } from "./reviewType";
 
 export interface song {
   title: string;
+  trackURI: string;
   artist: string;
   album: string;
   albumURL: string;
@@ -12,6 +13,7 @@ export interface song {
 
 export const defaultSong: song = {
   title: "",
+  trackURI: "",
   artist: "",
   album: "",
   albumURL: "",
