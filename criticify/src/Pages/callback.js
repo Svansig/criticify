@@ -7,6 +7,7 @@ const AuthCallback = () => {
   let { access_token, refresh_token, expires_in } = queryString.parse(
     window.location.hash
   );
+
   setStorage("access_token", access_token);
   setStorage("refresh_token", refresh_token);
   setStorage("expires_in", expires_in);

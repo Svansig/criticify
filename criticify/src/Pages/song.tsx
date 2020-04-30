@@ -76,20 +76,12 @@ const SongPage = () => {
         <Link to="/auth">Back To Your Recently Played</Link>
       </Button>
       <Row>
-        <Col sm="4" md="3" xl="2">
-          <ArtistSplash
-            artistName={selectedSong.artist.name}
-            image={selectedSong.artist.image[0]}
-          />
-        </Col>
-        <Col sm="8" md="9" xl="10">
-          <Row>
-            <ArtistHeader
-              artistName={selectedSong.artist.name}
-              artistDesc=""
-              albums={selectedSong.artist.albums}
-            />
-          </Row>
+        <ArtistSplash
+          artistName={selectedSong.artist.name}
+          image={selectedSong.artist.image[0]}
+        />
+
+        <Col lg="4">
           <Row>
             <AlbumHeader
               albumName={selectedSong.album.name}
@@ -102,10 +94,17 @@ const SongPage = () => {
               duration={selectedSong.song.duration}
             />
           </Row>
-          <Row>
-            <ReviewSection {...reviewSectionProps} />
-          </Row>
         </Col>
+        <Col lg="6">
+          <ReviewSection {...reviewSectionProps} />
+        </Col>
+      </Row>
+      <Row>
+        <ArtistHeader
+          artistName={selectedSong.artist.name}
+          artistDesc=""
+          albums={selectedSong.artist.albums}
+        />
       </Row>
     </Container>
   );

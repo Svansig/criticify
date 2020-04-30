@@ -1,4 +1,6 @@
 import React from "react";
+import { Col } from "reactstrap";
+import "./artistSplash.css";
 
 type artistSplashProps = {
   artistName: string;
@@ -7,10 +9,7 @@ type artistSplashProps = {
 
 const ArtistSplash = (props: artistSplashProps) => {
   return (
-    <div>
-      <h1>Artist Splash</h1>
-      <img alt="" src={props.image} />
-    </div>
+    <img className="artistSplash" height="100%" alt="" src={props.image} />
   );
 };
 
