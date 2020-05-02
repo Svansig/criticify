@@ -17,11 +17,14 @@ export const playCurrent = (trackID) => {
   };
 };
 
-export const playSpecific = (trackURI) => (dispatch) => {
+export const playSpecific = (URI) => (dispatch) => {
   dispatch({ type: LOADING_NEW_SONG });
   const token = getStorage("access_token");
   const deviceID = [getStorage("device_id")];
-  console.log(trackURI);
+  console.log(URI);
+  const data = URI.track
+    ? { uris: [URI.track] }
+    : { context_uri: URI.album || URI.playlist };
   return axios({
     method: "PUT",
     url:
@@ -30,9 +33,7 @@ export const playSpecific = (trackURI) => (dispatch) => {
     headers: {
       Authorization: "Bearer " + token,
     },
-    data: {
-      uris: [trackURI],
-    },
+    data: data,
   })
     .then((res) => {
       dispatch({ type: LOADING_NEW_SONG_SUCCESS, payload: res });

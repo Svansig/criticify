@@ -36,7 +36,7 @@ const AlbumView = ({ album, closeHeader }: albumViewProps) => {
               <button
                 className="w-24"
                 onClick={() =>
-                  dispatch(playSpecific(`spotify:track:${track.id}`))
+                  dispatch(playSpecific({ track: `spotify:track:${track.id}` }))
                 }
               >
                 Play It!

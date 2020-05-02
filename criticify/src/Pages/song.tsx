@@ -86,6 +86,7 @@ const SongPage = () => {
         <AlbumHeader
           albumName={selectedSong.album.name}
           image={selectedSong.album.image}
+          albumID={selectedSong.album.albumID}
         />
 
         <SongHeader

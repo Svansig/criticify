@@ -43,7 +43,9 @@ function SongCard(props) {
             <FontAwesomeIcon
               icon={faPlayCircle}
               className="my-2 fa-3x mx-auto"
-              onClick={() => dispatch(playSpecific(props.song.trackURI))}
+              onClick={() =>
+                dispatch(playSpecific({ track: props.song.trackURI }))
+              }
             >
               Play Now
             </FontAwesomeIcon>
