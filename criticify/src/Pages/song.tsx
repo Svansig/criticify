@@ -7,7 +7,6 @@ import SongHeader from "../components/ReviewPage/songHeader";
 import ReviewSection from "../components/ReviewPage/reviewSection";
 import { state } from "../types/stateType";
 
-import { Container, Row, Col, Button } from "reactstrap";
 import { getStorage } from "../utils/localStore";
 import { Link } from "react-router-dom";
 
@@ -71,42 +70,32 @@ const SongPage = () => {
   };
 
   return (
-    <Container>
-      <Button size="lg" block>
-        <Link to="/auth">Back To Your Recently Played</Link>
-      </Button>
-      <Row>
+    <div className="mx-auto lg: w-3/4">
+      <ArtistHeader
+        artistName={selectedSong.artist.name}
+        artistDesc=""
+        albums={selectedSong.artist.albums}
+      />
+      {/* <div className="fixed inset-0 object-cover object-center">
         <ArtistSplash
           artistName={selectedSong.artist.name}
           image={selectedSong.artist.image[0]}
         />
-
-        <Col lg="4">
-          <Row>
-            <AlbumHeader
-              albumName={selectedSong.album.name}
-              image={selectedSong.album.image}
-            />
-          </Row>
-          <Row>
-            <SongHeader
-              songTitle={selectedSong.song.title}
-              duration={selectedSong.song.duration}
-            />
-          </Row>
-        </Col>
-        <Col lg="6">
-          <ReviewSection {...reviewSectionProps} />
-        </Col>
-      </Row>
-      <Row>
-        <ArtistHeader
-          artistName={selectedSong.artist.name}
-          artistDesc=""
-          albums={selectedSong.artist.albums}
+      </div> */}
+      <div className="flex flex-row items-center">
+        <AlbumHeader
+          albumName={selectedSong.album.name}
+          image={selectedSong.album.image}
         />
-      </Row>
-    </Container>
+
+        <SongHeader
+          songTitle={selectedSong.song.title}
+          duration={selectedSong.song.duration}
+        />
+
+        <ReviewSection {...reviewSectionProps} />
+      </div>
+    </div>
   );
 };
 

@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { albumType } from "../../Pages/song";
-import { Collapse, Button, Col, Row } from "reactstrap";
 import { durationToTime } from "./songHeader";
 import { useDispatch } from "react-redux";
 import { getTracks } from "./actions/getTracks";
 import { playSpecific } from "../Player/Actions/playerActions";
 import { selectSongAction } from "./actions/selectSong";
-import "./albumView.css";
 
 type albumViewProps = {
   album: albumType;
@@ -27,53 +25,38 @@ const AlbumView = ({ album, closeHeader }: albumViewProps) => {
   }, [firstOpen]);
 
   return (
-    <div className="albumView">
-      <Row>
-        <Col lg="12">
-          <img
-            width="180"
-            height="180"
-            alt=""
-            src={album.image}
-            onClick={toggle}
-          />
-        </Col>
-        <Collapse isOpen={isOpen}>
-          <h1 className="trackList">{album.name}</h1>
-
-          {album.tracks.map((track) => {
-            return (
-              <Row className="trackList" lg="5">
-                <Col className="trackCol">{track.track_num}</Col>
-                <Col className="trackCol">
-                  <Button
-                    onClick={() =>
-                      dispatch(playSpecific(`spotify:track:${track.id}`))
-                    }
-                  >
-                    Play It!
-                  </Button>
-                </Col>
-                <Col sm="6" className="trackCol">
-                  {track.track_title}
-                </Col>
-                <Col className="trackCol">{durationToTime(track.duration)}</Col>
-                <Col className="trackCol">
-                  <Button
-                    onClick={() => {
-                      setIsOpen(false);
-                      closeHeader();
-                      dispatch(selectSongAction(track.id));
-                    }}
-                  >
-                    Review It!
-                  </Button>
-                </Col>
-              </Row>
-            );
-          })}
-        </Collapse>
-      </Row>
+    <div className="w-1/8 mx-4 my-4 overflow-hidden">
+      <img className=" h-32 w-32 " alt="" src={album.image} onClick={toggle} />
+      <h1 className="text-xl w-32 font-bold whitespace-normal">{album.name}</h1>
+      <div className={isOpen ? " flex flex-col" : "hidden"}>
+        {album.tracks.map((track) => {
+          return (
+            <div className="flex flex-row">
+              <div className=" w-6">{track.track_num}</div>
+              <button
+                className="w-24"
+                onClick={() =>
+                  dispatch(playSpecific(`spotify:track:${track.id}`))
+                }
+              >
+                Play It!
+              </button>
+              <div className="w-64">{track.track_title}</div>
+              <div className="w-24">{durationToTime(track.duration)}</div>
+              <button
+                className="3-24"
+                onClick={() => {
+                  setIsOpen(false);
+                  closeHeader();
+                  dispatch(selectSongAction(track.id));
+                }}
+              >
+                Review It!
+              </button>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

@@ -13,9 +13,13 @@ export const durationToTime = (duration: number): string => {
 
 const songHeader = (props: songHeaderProps) => {
   return (
-    <div>
-      {props.songTitle}
-      {durationToTime(props.duration)}
+    <div className="flex-1 flex-col text-right mx-6">
+      <div className="text-gray-800 font-black text-6xl leading-tight">
+        {props.songTitle}
+      </div>
+      <div className="text-gray-800 font-hairline text-6xl">
+        {durationToTime(props.duration)}
+      </div>
     </div>
   );
 };

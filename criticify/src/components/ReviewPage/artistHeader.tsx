@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { albumType } from "../../Pages/song";
-import { Collapse, Col, Row } from "reactstrap";
 import AlbumView from "./albumView";
 
 type artistHeaderProps = {
@@ -15,18 +14,22 @@ const ArtistHeader = (props: artistHeaderProps) => {
   const closeHeader = () => setIsOpen(false);
 
   return (
-    <Col lg="12">
-      <div>
-        <h1 onClick={toggle}>{props.artistName}</h1>
-        <Collapse isOpen={isOpen}>
-          <Row lg="6">
-            {props.albums.map((album) => {
-              return <AlbumView album={album} closeHeader={closeHeader} />;
-            })}
-          </Row>
-        </Collapse>
+    <div className="mx-auto my-6">
+      <div className="text-center">
+        <h1 className="text-6xl " onClick={toggle}>
+          {props.artistName}
+        </h1>
+        <div
+          className={
+            isOpen ? "flex flex-row flex-wrap justify-start" : "hidden"
+          }
+        >
+          {props.albums.map((album) => {
+            return <AlbumView album={album} closeHeader={closeHeader} />;
+          })}
+        </div>
       </div>
-    </Col>
+    </div>
   );
 };
 

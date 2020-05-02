@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import SongCard from "./songCard";
 import { getStorage } from "../../utils/localStore";
-import { Row } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { getRecentlyPlayed } from "./recentlyPlayedActions";
 
@@ -18,11 +17,11 @@ const SongList = () => {
       {recentlyPlayed.loading && <h1>Is Loading.....</h1>}
       {recentlyPlayed.error && <h1>Error.....</h1>}
       {
-        <Row>
+        <div className="flex flex-wrap flex-row">
           {recentlyPlayed.songs.map((song) => (
             <SongCard key={song.songID} song={song} />
           ))}
-        </Row>
+        </div>
       }
     </>
   );

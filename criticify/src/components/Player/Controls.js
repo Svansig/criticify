@@ -4,7 +4,7 @@ import { getStorage } from "../../utils/localStore";
 import hydrateState from "../../utils/hydrateState";
 import { Row, Button, ButtonGroup } from "reactstrap";
 
-const playHere = () => {
+export const playHere = () => {
   const token = getStorage("access_token");
   const deviceID = [getStorage("device_id")];
   console.log(deviceID);

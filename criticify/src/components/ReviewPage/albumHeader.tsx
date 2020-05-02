@@ -1,5 +1,4 @@
 import React from "react";
-import { Col, Row } from "reactstrap";
 
 type albumHeaderProps = {
   albumName: string;
@@ -8,12 +7,18 @@ type albumHeaderProps = {
 
 const AlbumHeader = (props: albumHeaderProps) => {
   return (
-    <Col lg="9">
-      <Row>{props.albumName}</Row>
-      <Row>
-        <img width="100%" height="100%" alt="" src={props.image} />
-      </Row>
-    </Col>
+    <div className="flex flex-col flex-1">
+      <div>
+        <img
+          className="w-64 h-64 object-cover object-center mx-auto"
+          alt=""
+          src={props.image}
+        />
+      </div>
+      <div className="text-xl text-gray-700 font-bold text-center">
+        {props.albumName}
+      </div>
+    </div>
   );
 };
 

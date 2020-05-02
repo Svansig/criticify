@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Input, Button } from "reactstrap";
 import axios from "axios";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type reviewSectionProps = {
   id: string;
@@ -38,15 +39,21 @@ const AlbumHeader = (props: reviewSectionProps) => {
   const [description, setDescription] = useState("");
 
   return (
-    <div>
-      <Input value={rating} onChange={(e) => setRating(+e.target.value)} />
-      <Input
+    <div className="flex-2 w-1/3 flex flex-col text-center mx-6">
+      {/* <FontAwesomeIcon icon={faStar} /> */}
+      <input
+        className="border-solid border-2 border-gray-700 bg-gray-200 text-center align-middle h-56"
+        type="text"
+        placeholder="Rate this song!"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
-      <Button onClick={() => submitReview({ ...props, rating, description })}>
+      <button
+        className="text-lg border-solid border-gray-800 p-6 mx-auto my-6 bg-indigo-300 shadow-xs text-white"
+        onClick={() => submitReview({ ...props, rating, description })}
+      >
         Submit
-      </Button>
+      </button>
     </div>
   );
 };

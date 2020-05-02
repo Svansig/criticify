@@ -1,5 +1,4 @@
 import React from "react";
-// import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AuthCallback from "./Pages/callback";
 import SigninPage from "./Pages/signin";
@@ -12,8 +11,8 @@ import SongPage from "./Pages/song";
 function App() {
   return (
     <Provider store={store}>
-      <Navigation />
       <Router>
+        <Navigation />
         <Switch>
           <Route path="/review">
             <SongPage />

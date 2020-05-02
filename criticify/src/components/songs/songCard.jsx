@@ -3,98 +3,64 @@ import { playSpecific } from "../Player/Actions/playerActions";
 import { useDispatch } from "react-redux";
 import { selectSongAction } from "../../components/ReviewPage/actions/selectSong";
 import { Link } from "react-router-dom";
-
-import {
-  Card,
-  CardImg,
-  CardBody,
-  CardText,
-  CardTitle,
-  CardSubtitle,
-  Button,
-  Col,
-  Row,
-  Collapse,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  Input,
-} from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
 
 function SongCard(props) {
-  const [isOpen, setIsOpen] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
-  const toggleDetails = () => setShowDetails(!isOpen);
+  const toggleDetails = () => setShowDetails(!showDetails);
 
   const [artistReview, setArtistReview] = useState("");
   const [songReview, setSongReview] = useState("");
   const dispatch = useDispatch();
 
   return (
-    <Col xs="6" sm="4" xl="2">
-      <Card>
-        <Row>
-          <CardImg
-            top
-            width="100%"
-            src={props.song.albumURL}
-            alt=""
-            onClick={toggleDetails}
-          />
-          <Col>
-            <CardBody>
-              <Col>
-                <Collapse isOpen={showDetails}>
-                  <CardTitle>{props.song.title}</CardTitle>
-                  <CardSubtitle>{props.song.artist}</CardSubtitle>
-                  <CardText></CardText>
-                  <Button
-                    onClick={() => dispatch(playSpecific(props.song.trackURI))}
-                  >
-                    Play Now
-                  </Button>
-                  <Button>
-                    <Link
-                      to="/review"
-                      onClick={() => {
-                        dispatch(selectSongAction(props.song.songID));
-                      }}
-                    >
-                      Kayla Gonna Tell You!
-                    </Link>
-                  </Button>
-                </Collapse>
-              </Col>
-              <Col>
-                <Collapse isOpen={isOpen}>
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>{props.song.artist}</InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      placeholder="Rate The Artist"
-                      value={artistReview}
-                      onChange={(e) => setArtistReview(e.target.value)}
-                    />
-                  </InputGroup>
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>{props.song.name}</InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      placeholder="Rate The Song"
-                      value={songReview}
-                      onChange={(e) => setSongReview(e.target.value)}
-                    />
-                  </InputGroup>
-                </Collapse>
-              </Col>
-            </CardBody>
-          </Col>
-        </Row>
-      </Card>
-    </Col>
+    <div className="flex flex-col m-4 relative">
+      <div>
+        <img
+          src={props.song.albumURL}
+          alt=""
+          onClick={toggleDetails}
+          className="object-cover object-center w-64 h-64"
+        />
+      </div>
+      <div
+        onClick={() => setShowDetails(false)}
+        className={showDetails ? "absolute" : "hidden"}
+      >
+        <div className="bg-gray-400 bg-opacity-75 block w-64 h-64">
+          <div className="flex flex-col justify-between top-auto mx-auto">
+            <div className="mx-auto">
+              <div className="text-xl font-bold text-gray-800 mx-auto">
+                {props.song.title}
+              </div>
+              <div className="text-2xl font-thin text-gray-900 mx-auto">
+                {props.song.artist}
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col mx-auto p-6 ">
+            <FontAwesomeIcon
+              icon={faPlayCircle}
+              className="my-2 fa-3x mx-auto"
+              onClick={() => dispatch(playSpecific(props.song.trackURI))}
+            >
+              Play Now
+            </FontAwesomeIcon>
+
+            <Link
+              className="mx-auto p-6 my-2 text-md text-indigo-800 font-bold"
+              to="/review"
+              onClick={() => {
+                dispatch(selectSongAction(props.song.songID));
+              }}
+            >
+              Kayla Gonna Tell You!
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
